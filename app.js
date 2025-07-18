@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 
 const app = express();
 const PORT = 3000;
-const API_URL = "http://api.qrserver.com/v1/create-qr-code/";
+const API_URL = "https://api.qrserver.com/v1/create-qr-code/";
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
