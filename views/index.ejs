@@ -19,15 +19,21 @@
 			</div>
 		</nav>
 
-		<main>
+		<main class="px-4 py-8 sm:px-6 lg:px-12">
 			<form action="/generate" method="post">
-				<input type="text" name="text" id="text" placeholder="Input text" required />
-				<button type="submit">Generate</button>
+				<select class="w-full p-2 border border-gray-300 focus:outline-none" name="fileType" id="fileType">
+					<option value="">Select file type</option>
+					<option value="png">PNG</option>
+					<option value="jpg">JPG</option>
+					<option value="svg">SVG</option>
+					<option value="eps">EPS</option>
+				</select>
+
+				<input class="border" type="text" name="userText" id="userText" placeholder="Input text" required />
+				<button class="bg-emerald-300" type="submit">Generate</button>
 			</form>
 
-			<img class="qr-image" src="<%= filePath %>" alt="qr-code" />
-
-			<p><%= content %></p>
+			<img src="<%= content %>" alt="" />
 		</main>
 
 		<footer></footer>
