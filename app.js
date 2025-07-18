@@ -18,17 +18,22 @@ app.get("/", (req, res) => {
 app.post("/generate", async (req, res) => {
 	try {
 		const response = await axios.get(API_URL, {
-			responseType: "arraybuffer",
+			responseType: "arraybuffer", // required, will return buffer data and if not you get unreadable data.
+
+			// Getting response with parameters
 			params: {
 				data: req.body.userText,
 				format: req.body.fileType,
 			},
 		});
 
-		console.log(response.data)
-
+		// Convert response.data as binary to Base64.
 		const base64Image = Buffer.from(response.data, "binary").toString("base64");
+
+		// Getting response headers with name "content-type".
 		const contentType = response.headers["content-type"]; // e.g. image/png
+
+		// Embed the image as data URL string
 		const dataURI = `data:${contentType};base64,${base64Image}`;
 
 		res.render("index", { content: dataURI });
