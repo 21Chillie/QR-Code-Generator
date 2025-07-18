@@ -1,19 +1,15 @@
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+@import "tailwindcss";
+
+@font-face {
+	font-family: "Fira Code";
+	src: url("../fonts/FiraCode-VariableFont_wght.ttf");
+	font-optical-sizing: auto;
+	font-style: normal;
 }
 
-a {
-	text-decoration: none;
-	color: inherit;
-}
-
-ul,
-ol {
-	list-style: none;
+body {
+	font-family: "Fira Code", monospace;
+	-webkit-font-smoothing: antialiased;
 }
 
 button {
@@ -21,6 +17,13 @@ button {
 }
 
 /* Start below */
+
+.btn-project {
+	border-radius: 16px;
+	border: 1px solid #454550;
+	background: #1e1e22;
+	color: white;
+}
 
 .qr-image {
 	width: 200px;

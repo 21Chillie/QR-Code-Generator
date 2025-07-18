@@ -4,16 +4,32 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<link rel="stylesheet" href="css/tailwind.css" />
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
-		<form action="/generate" method="post">
-			<input type="text" name="text" id="text" placeholder="Input text" required />
-			<button type="submit">Generate</button>
-		</form>
+		<nav class="bg-white shadow-md">
+			<div class="flex items-center justify-between px-4 py-4 sm:px-6 lg:px-12">
+				<div class="nav-brand flex gap-2.5 items-center">
+					<img class="w-12" src="/images/qr-logo.png" alt="QR Generator Logo" />
+					<p class="text-base">QR Generator</p>
+				</div>
 
-		<img class="qr-image" src="<%= filePath %>" alt="qr-code" />
+				<button class="btn-project py-2 px-4">More Project</button>
+			</div>
+		</nav>
 
-		<p><%= content %></p>
+		<main>
+			<form action="/generate" method="post">
+				<input type="text" name="text" id="text" placeholder="Input text" required />
+				<button type="submit">Generate</button>
+			</form>
+
+			<img class="qr-image" src="<%= filePath %>" alt="qr-code" />
+
+			<p><%= content %></p>
+		</main>
+
+		<footer></footer>
 	</body>
 </html>
