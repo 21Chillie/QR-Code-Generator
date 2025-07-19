@@ -6,13 +6,13 @@ const app = express();
 const PORT = 3000;
 const API_URL = "https://api.qrserver.com/v1/create-qr-code/";
 
+app.set("view engine", "ejs");
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set("view engine", "ejs");
-
 app.get("/", (req, res) => {
-	res.render("index", { qrImage: null, response: null });
+	res.render("index", { qrImage: null, response: "Waiting to generate QR..." });
 });
 
 app.post("/generate", async (req, res) => {
@@ -60,10 +60,14 @@ app.post("/generate", async (req, res) => {
 		// Embed the image as data URL string
 		const dataURI = `data:${contentType};base64,${base64Image}`;
 
+		if (!req.body.userText || req.body.userText.trim() === "") {
+			return res.render("index", { qrImage: null, response: "Input cannot be empty!" });
+		}
+
 		res.render("index", { qrImage: dataURI, response: "Generate QR Success!" });
 	} catch (error) {
-		console.error("Failed to fetch QR code:", error.response);
-		res.render("index", { qrImage: dataURI, response: "Oops something wrong with our end." });
+		console.error("Failed to fetch QR code:", error.response.data || error.message);
+		res.render("index", { qrImage: null, response: "Oops, something went wrong on our end." });
 	}
 });
 
