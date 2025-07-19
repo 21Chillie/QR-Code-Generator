@@ -21,6 +21,7 @@ app.post("/generate", async (req, res) => {
 	hexColor = hexColor === "#ffffff" || hexColor === "fff" ? "#000" : hexColor;
 	const color = hexColor.replace("#", "");
 
+	// Parameter for API
 	let config = {
 		responseType: "arraybuffer",
 		params: {
