@@ -1,8 +1,8 @@
 {
 	"name": "qr-code-web",
-	"version": "1.0.0",
-	"description": "",
-	"license": "ISC",
+	"version": "1.0.1",
+	"description": "QR Code Generator Project",
+	"license": "MIT",
 	"author": "Real",
 	"type": "module",
 	"main": "app.js",
