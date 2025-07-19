@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
 
@@ -12,12 +12,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-	res.render("index", { content: null });
+	res.render("index", { qrImage: null, response: null });
 });
 
 app.post("/generate", async (req, res) => {
 	const reqInputType = req.body.inputType;
-	const hexColor = req.body.color;
+	let hexColor = req.body.color.toLowerCase();
+	hexColor = hexColor === "#ffffff" || hexColor === "fff" ? "#000" : hexColor;
 	const color = hexColor.replace("#", "");
 
 	let config = {
@@ -58,10 +59,10 @@ app.post("/generate", async (req, res) => {
 		// Embed the image as data URL string
 		const dataURI = `data:${contentType};base64,${base64Image}`;
 
-		res.render("index", { qrImage: dataURI });
+		res.render("index", { qrImage: dataURI, response: "Generate QR Success!" });
 	} catch (error) {
 		console.error("Failed to fetch QR code:", error.response);
-		res.sendStatus(500);
+		res.render("index", { qrImage: dataURI, response: "Oops something wrong with our end." });
 	}
 });
 
