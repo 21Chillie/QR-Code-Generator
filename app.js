@@ -30,7 +30,7 @@ app.post("/generate", async (req, res) => {
 			color: color,
 			bgcolor: "fff",
 			size: "300x300",
-			margin: "24",
+			margin: 24,
 		},
 	};
 
@@ -43,7 +43,7 @@ app.post("/generate", async (req, res) => {
 				color: color,
 				bgcolor: "fff",
 				size: "300x300",
-				margin: "24",
+				margin: 24,
 			},
 		};
 	}
