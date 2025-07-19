@@ -16,16 +16,38 @@ app.get("/", (req, res) => {
 });
 
 app.post("/generate", async (req, res) => {
-	try {
-		const response = await axios.get(API_URL, {
-			responseType: "arraybuffer", // required, will return buffer data and if not you get unreadable data.
+	const reqInputType = req.body.inputType;
+	const hexColor = req.body.color;
+	const color = hexColor.replace("#", "");
 
-			// Getting response with parameters
+	let config = {
+		responseType: "arraybuffer",
+		params: {
+			data: req.body.userText,
+			format: req.body.fileType,
+			color: color,
+			bgcolor: "fff",
+			size: "300x300",
+			margin: "24",
+		},
+	};
+
+	if (reqInputType === "email") {
+		config = {
+			responseType: "arraybuffer",
 			params: {
-				data: req.body.userText,
+				data: `mailto:${req.body.userText}`,
 				format: req.body.fileType,
+				color: color,
+				bgcolor: "fff",
+				size: "300x300",
+				margin: "24",
 			},
-		});
+		};
+	}
+
+	try {
+		const response = await axios.get(API_URL, config);
 
 		// Convert response.data as binary to Base64.
 		const base64Image = Buffer.from(response.data, "binary").toString("base64");
@@ -36,7 +58,7 @@ app.post("/generate", async (req, res) => {
 		// Embed the image as data URL string
 		const dataURI = `data:${contentType};base64,${base64Image}`;
 
-		res.render("index", { content: dataURI });
+		res.render("index", { qrImage: dataURI });
 	} catch (error) {
 		console.error("Failed to fetch QR code:", error.response);
 		res.sendStatus(500);
