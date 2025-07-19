@@ -2,6 +2,11 @@
 
 A simple QR code generator web application built with Node.js, Express, Axios, and EJS templating.
 
+
+## Demo
+
+![QR Code Generator Demo](./assets/demo.gif)
+
 ## Features
 
 - Dynamic input types: URL, Text, or Email
