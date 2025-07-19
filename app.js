@@ -1,10 +1,10 @@
-import { createWriteStream } from "node:fs";
-import express from "express";
+import express, { response } from "express";
+import axios from "axios";
 import bodyParser from "body-parser";
-import qr from "qr-image";
 
 const app = express();
 const PORT = 3000;
+const API_URL = "https://api.qrserver.com/v1/create-qr-code/";
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,26 +12,61 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-	res.render("index.ejs", { content: null, filePath: null });
+	res.render("index", { qrImage: null, response: null });
 });
 
-app.post("/generate", (req, res) => {
+app.post("/generate", async (req, res) => {
+	const reqInputType = req.body.inputType;
+	let hexColor = req.body.color.toLowerCase();
+	hexColor = hexColor === "#ffffff" || hexColor === "fff" ? "#000" : hexColor;
+	const color = hexColor.replace("#", "");
+
+	// Parameter for API
+	let config = {
+		responseType: "arraybuffer",
+		params: {
+			data: req.body.userText,
+			format: req.body.fileType,
+			color: color,
+			bgcolor: "fff",
+			size: "300x300",
+			margin: 24,
+		},
+	};
+
+	if (reqInputType === "email") {
+		config = {
+			responseType: "arraybuffer",
+			params: {
+				data: `mailto:${req.body.userText}`,
+				format: req.body.fileType,
+				color: color,
+				bgcolor: "fff",
+				size: "300x300",
+				margin: 24,
+			},
+		};
+	}
+
 	try {
-		const text = req.body.text;
-		const fileName = "user-qr";
+		const response = await axios.get(API_URL, config);
 
-		// Generate QR Code Image from text variable to directory public/images/filename.svg
-		qr.image(text, { type: "svg" }).pipe(createWriteStream(`public/images/qr-image/${fileName}.svg`));
+		// Convert response.data as binary to Base64.
+		const base64Image = Buffer.from(response.data, "binary").toString("base64");
 
-		const filePath = `/images/qr-image/${fileName}.svg`;
+		// Getting response headers with name "content-type".
+		const contentType = response.headers["content-type"]; // e.g. image/png
 
-		res.render("index", { content: "Generate Success", filePath: filePath });
+		// Embed the image as data URL string
+		const dataURI = `data:${contentType};base64,${base64Image}`;
+
+		res.render("index", { qrImage: dataURI, response: "Generate QR Success!" });
 	} catch (error) {
-		console.error("QR Code Generation Failed:", error);
-		res.render("index", { content: "Oops! Something went wrong on our end.", filePath: null });
+		console.error("Failed to fetch QR code:", error.response);
+		res.render("index", { qrImage: dataURI, response: "Oops something wrong with our end." });
 	}
 });
 
 app.listen(PORT, () => {
-	console.log(`Server listening on port ${PORT}`);
+	console.log(`Server listening on port http://localhost:${PORT}`);
 });

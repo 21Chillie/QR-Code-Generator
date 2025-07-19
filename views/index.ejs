@@ -4,16 +4,81 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="/css/coloris.min.css" />
+		<link rel="stylesheet" href="/css/tailwind.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		<script src="/js/jscolor.min.js" defer></script>
+		<script src="/js/main.js" defer></script>
 	</head>
 	<body>
-		<form action="/generate" method="post">
-			<input type="text" name="text" id="text" placeholder="Input text" required />
-			<button type="submit">Generate</button>
-		</form>
+		<nav class="shadow-md">
+			<div class="flex items-center justify-between py-4 px-4 sm:px-6 md:px-12 lg:px-24 xl:px-48">
+				<div class="nav-brand flex gap-2.5 items-center">
+					<img class="w-12" src="/images/qr-logo.png" alt="QR Generator Logo" />
+					<p class="text-base">QR Generator</p>
+				</div>
 
-		<img class="qr-image" src="<%= filePath %>" alt="qr-code" />
+				<a href="https://github.com/21Chillie">
+					<button class="btn-project py-2 px-4 flex gap-2 items-center hover:opacity-80">
+						<img class="w-6" src="/images/github-fill.svg" alt="" />
+						<p>21chillie</p>
+					</button>
+				</a>
+			</div>
+		</nav>
 
-		<p><%= content %></p>
+		<main class="py-12 px-4 sm:px-6 md:px-12 lg:px-24 xl:px-48 grid grid-cols-2 max-sm:grid-cols-1 gap-9">
+			<section id="form-section">
+				<form action="/generate" method="post" class="flex flex-col gap-8">
+					<div class="collapse-container flex flex-col gap-2 w-full">
+						<div class="collapse collapse-plus bg-base-100 border border-base-300">
+							<input type="radio" name="my-accordion-2" checked="checked" />
+							<div class="collapse-title font-semibold">Enter your content (Required)</div>
+							<div class="collapse-content flex gap-3">
+								<select class="p-2 border border-gray-300 focus:outline-none" name="inputType" id="inputType">
+									<option value="">Select input type</option>
+									<option value="text">Text</option>
+									<option value="url">URL</option>
+									<option value="email">Email</option>
+								</select>
+								<input class="border w-full" type="text" name="userText" id="userText" placeholder="Your text here..." required />
+							</div>
+						</div>
+						<div class="collapse collapse-plus bg-base-100 border border-base-300">
+							<input type="radio" name="my-accordion-2" />
+							<div class="collapse-title font-semibold">Select file type to download (Default: PNG)</div>
+							<div class="collapse-content text-sm">
+								<select class="w-full p-2 border border-gray-300 focus:outline-none" name="fileType" id="fileType">
+									<option value="">Select file type</option>
+									<option value="png">PNG</option>
+									<option value="jpg">JPG</option>
+									<option value="svg">SVG</option>
+									<option value="eps">EPS</option>
+								</select>
+							</div>
+						</div>
+						<div class="collapse collapse-plus bg-base-100 border border-base-300">
+							<input type="radio" name="my-accordion-2" />
+							<div class="collapse-title font-semibold">Set Colors (Default: Black)</div>
+							<div class="collapse-content">
+								<label for="color">Choose color by hex: </label>
+								<input
+									class="bg-base-100 border border-white"
+									name="color"
+									id="color"
+									data-jscolor="{ preset: 'dark', closeButton: true, closeText: 'OK' }"
+								/>
+							</div>
+						</div>
+					</div>
+					<button class="bg-emerald-300 hover:opacity-90 py-2 px-4 text-black rounded-md" type="submit">Generate</button>
+				</form>
+			</section>
+
+			<section id="qr-generate-section" class="flex flex-col items-center gap-4">
+				<img src="<%= qrImage %>" alt="Wait to generate QR.." />
+				<p><%= response %></p>
+			</section>
+		</main>
 	</body>
 </html>
