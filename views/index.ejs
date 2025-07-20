@@ -16,14 +16,14 @@
 				<a href="/">
 					<div class="nav-brand flex gap-2.5 items-center">
 						<img class="w-12" src="/images/qr-logo.png" alt="QR Generator Logo" />
-						<p class="text-base logo-text">QR Generator</p>
+						<p class="text-base logo-text max-sm:hidden">QR Generator</p>
 					</div>
 				</a>
 
 				<a href="https://github.com/21Chillie">
 					<button class="btn-project py-2 px-4 flex gap-2 items-center hover:opacity-80">
 						<img class="w-6" src="/images/github-fill.svg" alt="" />
-						<p>21chillie</p>
+						<p class="text-base">21chillie</p>
 					</button>
 				</a>
 			</div>
@@ -36,14 +36,14 @@
 						<div class="collapse collapse-plus bg-base-100 border border-base-300">
 							<input type="radio" name="my-accordion-2" checked="checked" />
 							<div class="collapse-title font-semibold">Enter your content (Required)</div>
-							<div class="collapse-content flex gap-3">
+							<div class="collapse-content flex flex-col gap-3">
 								<select class="p-2 border border-gray-300 focus:outline-none" name="inputType" id="inputType">
 									<option value="">Select input type</option>
 									<option value="text">Text</option>
 									<option value="url">URL</option>
 									<option value="email">Email</option>
 								</select>
-								<input class="border w-full" type="text" name="userText" id="userText" placeholder="Your text here..." required />
+								<input class="border w-full py-2" type="text" name="userText" id="userText" placeholder="Your text here..." required />
 							</div>
 						</div>
 						<div class="collapse collapse-plus bg-base-100 border border-base-300">
