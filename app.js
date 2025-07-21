@@ -17,6 +17,8 @@ app.get("/", (req, res) => {
 
 app.post("/generate", async (req, res) => {
 	const reqInputType = req.body.inputType;
+
+	// Convert input color to lowercase and adjust white to black
 	let hexColor = req.body.color.toLowerCase();
 	hexColor = hexColor === "#ffffff" || hexColor === "fff" ? "#000" : hexColor;
 	const color = hexColor.replace("#", "");
@@ -34,18 +36,9 @@ app.post("/generate", async (req, res) => {
 		},
 	};
 
+	// Format email input if selected
 	if (reqInputType === "email") {
-		config = {
-			responseType: "arraybuffer",
-			params: {
-				data: `mailto:${req.body.userText}`,
-				format: req.body.fileType,
-				color: color,
-				bgcolor: "fff",
-				size: "300x300",
-				margin: 24,
-			},
-		};
+		config.params.data === `mailto:${req.body.userText}`;
 	}
 
 	try {
