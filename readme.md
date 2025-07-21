@@ -49,8 +49,13 @@ cd qr-code-generator
 ```
 
 After that install all dependencies:
+
 ```bash
 npm install
+```
+
+```bash
+npm run build
 ```
 
 Start the development server:
