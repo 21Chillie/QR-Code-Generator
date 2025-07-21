@@ -2,16 +2,15 @@
 
 A simple QR code generator web application built with Node.js, Express, Axios, and EJS templating.
 
-
 ## Demo
 
 ![QR Code Generator Demo](./assets/demo.gif)
 
 ## Features
 
-- Dynamic input types: URL, Text, or Email
-- Choose file type: PNG, JPG, SVG, or EPS
-- Pick custom color for the QR code
+- Dynamic input types: URL, Text, or Email.
+- Choose file type: PNG, JPG, JPEG or SVG.
+- Pick custom color for the QR code.
 
 ## Prerequisites
 
@@ -28,6 +27,7 @@ npm -v
 ```
 
 ## Folder Structure
+
 ```
 ├── public/          # Static assets (CSS, JS, images, fonts)
 ├── views/           # EJS templates
@@ -39,6 +39,7 @@ npm -v
 ## How To Run Locally
 
 and then clone the project:
+
 ```bash
 https://github.com/21Chillie/QR-Code-Generator.git
 ```
@@ -47,20 +48,28 @@ https://github.com/21Chillie/QR-Code-Generator.git
 cd qr-code-generator
 ```
 
-After that install all dependencies:
+After that install all dependencies and Build:
+
 ```bash
 npm install
 ```
 
+```bash
+npm run build
+```
+
 Start the development server:
+
 ```bash
 npm start
 ```
 
 Then open your browser and go to:
+
 ```bash
 http://localhost:3000
 ```
 
 ## License
+
 This project is open-source and available under the MIT License.
