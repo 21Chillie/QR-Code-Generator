@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-		<link rel="stylesheet" href="/css/coloris.min.css" />
+		<title>QR Code Generator</title>
 		<link rel="stylesheet" href="/css/tailwind.css" />
 		<link rel="stylesheet" href="/css/style.css" />
 		<script src="/js/jscolor.min.js" defer></script>
@@ -37,13 +36,13 @@
 							<input type="radio" name="my-accordion-2" checked="checked" />
 							<div class="collapse-title font-semibold">Enter your content (Required)</div>
 							<div class="collapse-content flex flex-col gap-3">
-								<select class="p-2 border border-gray-300 focus:outline-none" name="inputType" id="inputType">
+								<select class="p-2 border border-gray-300 focus:outline-none text-sm" name="inputType" id="inputType">
 									<option value="">Select input type</option>
 									<option value="text">Text</option>
 									<option value="url">URL</option>
 									<option value="email">Email</option>
 								</select>
-								<input class="border w-full py-2" type="text" name="userText" id="userText" placeholder="Your text here..." required />
+								<input class="border w-full py-2 text-sm" type="text" name="userText" id="userText" placeholder="Your text here..." required />
 							</div>
 						</div>
 						<div class="collapse collapse-plus bg-base-100 border border-base-300">
