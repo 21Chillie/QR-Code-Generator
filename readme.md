@@ -47,9 +47,10 @@ https://github.com/21Chillie/QR-Code-Generator.git
 cd qr-code-generator
 ```
 
-After that install all dependencies:
+After that install all dependencies and Build CSS:
 ```bash
 npm install
+npm run build:css
 ```
 
 Start the development server:
